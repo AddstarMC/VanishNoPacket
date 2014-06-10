@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.kitteh.vanish.Debuggle;
 import org.kitteh.vanish.VanishPlugin;
 import org.kitteh.vanish.hooks.plugins.BPermissionsHook;
+import org.kitteh.vanish.hooks.plugins.BungeeChatHook;
 import org.kitteh.vanish.hooks.plugins.DisguiseCraftHook;
 import org.kitteh.vanish.hooks.plugins.DynmapHook;
 import org.kitteh.vanish.hooks.plugins.EssentialsHook;
@@ -28,7 +29,8 @@ public final class HookManager {
         JSONAPI(JSONAPIHook.class),
         ProtocolLib(ProtocolLibHook.class),
         SpoutCraft(SpoutCraftHook.class),
-        Vault(VaultHook.class);
+        Vault(VaultHook.class),
+        BungeeChat(BungeeChatHook.class);
 
         private Class<? extends Hook> clazz;
 

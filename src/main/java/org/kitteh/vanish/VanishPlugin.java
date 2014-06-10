@@ -312,6 +312,7 @@ public final class VanishPlugin extends JavaPlugin {
         if (this.getConfig().getBoolean("hooks.dynmap", false)) {
             this.hookManager.getHook(HookType.Dynmap).onEnable();
         }
+        hookManager.getHook(HookType.BungeeChat).onEnable();
         //if (this.getServer().getPluginManager().getPlugin("ProtocolLib") != null) {
         //    this.hookManager.getHook(HookType.ProtocolLib).onEnable();
         //}
