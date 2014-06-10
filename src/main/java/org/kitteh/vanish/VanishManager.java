@@ -223,9 +223,9 @@ public final class VanishManager {
      * @param vanishingPlayer
      */
     public void toggleVanishQuiet(Player vanishingPlayer) {
-        this.toggleVanishQuiet(vanishingPlayer, true);
+        this.toggleVanishQuiet(vanishingPlayer, true, true);
     }
-
+    
     /**
      * Toggles a player's visibility
      * Does not say anything.
@@ -234,8 +234,23 @@ public final class VanishManager {
      * @param effects if true, trigger effects
      */
     public void toggleVanishQuiet(Player vanishingPlayer, boolean effects) {
+        this.toggleVanishQuiet(vanishingPlayer, effects, true);
+    }
+
+    /**
+     * Toggles a player's visibility
+     * Does not say anything.
+     *
+     * @param vanishingPlayer
+     * @param effects if true, trigger effects
+     * @param updateStatus if true, will update bungee status
+     */
+    public void toggleVanishQuiet(Player vanishingPlayer, boolean effects, boolean updateStatus) {
         final boolean vanishing = !this.isVanished(vanishingPlayer);
         final String vanishingPlayerName = vanishingPlayer.getName();
+        if(updateStatus)
+        	BungeeHelper.setVanishState(vanishingPlayer, vanishing);
+        
         if (vanishing) {
             Debuggle.log("It's invisible time! " + vanishingPlayer.getName());
             this.setSleepingIgnored(vanishingPlayer);

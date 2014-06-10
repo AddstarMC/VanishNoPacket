@@ -66,6 +66,23 @@ public final class VanishAnnounceManipulator {
             return true;
         }
     }
+    
+    public void setFakeOnlineStatus(String playerName, boolean status)
+    {
+    	final Player player = this.plugin.getServer().getPlayerExact(playerName);
+        if (player == null)
+            return;
+        
+        playerName = player.getName();
+        
+        if(!status)
+        	addToDelayedAnnounce(playerName);
+        else
+        {
+        	playerOnlineStatus.put(playerName, status);
+        	dropDelayedAnnounce(playerName);
+        }
+    }
 
     /**
      * Marks a player as quit
@@ -104,19 +121,21 @@ public final class VanishAnnounceManipulator {
 
     void fakeJoin(Player player, boolean force) {
         if (force || !(this.playerOnlineStatus.containsKey(player.getName()) && this.playerOnlineStatus.get(player.getName()))) {
-            this.plugin.getServer().broadcastMessage(ChatColor.YELLOW + this.injectPlayerInformation(Settings.getFakeJoin(), player));
+        	BungeeHelper.broadcastMessage(ChatColor.YELLOW + this.injectPlayerInformation(Settings.getFakeJoin(), player));
             this.plugin.getLogger().info(player.getName() + " faked joining");
             MetricsOverlord.getFakejoinTracker().increment();
             this.playerOnlineStatus.put(player.getName(), true);
+            BungeeHelper.setOnlineState(player, true);
         }
     }
 
     void fakeQuit(Player player, boolean force) {
         if (force || !(this.playerOnlineStatus.containsKey(player.getName()) && !this.playerOnlineStatus.get(player.getName()))) {
-            this.plugin.getServer().broadcastMessage(ChatColor.YELLOW + this.injectPlayerInformation(Settings.getFakeQuit(), player));
+        	BungeeHelper.broadcastMessage(ChatColor.YELLOW + this.injectPlayerInformation(Settings.getFakeQuit(), player));
             this.plugin.getLogger().info(player.getName() + " faked quitting");
             MetricsOverlord.getFakequitTracker().increment();
             this.playerOnlineStatus.put(player.getName(), false);
+            BungeeHelper.setOnlineState(player, false);
         }
     }
 

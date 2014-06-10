@@ -10,8 +10,9 @@ public final class Settings {
     private static boolean autoFakeJoinSilent;
     private static boolean worldChangeCheck;
     private static int lightningEffectCount;
+    private static String chatChannel;
 
-    private static final int confVersion = 5; // Tracking config version
+    private static final int confVersion = 6; // Tracking config version
 
     public static boolean getAutoFakeJoinSilent() {
         return Settings.autoFakeJoinSilent;
@@ -35,6 +36,10 @@ public final class Settings {
 
     public static boolean getWorldChangeCheck() {
         return Settings.worldChangeCheck;
+    }
+    
+    public static String getChatChannel() {
+    	return Settings.chatChannel;
     }
 
     static void freshStart(VanishPlugin plugin) {
@@ -64,6 +69,9 @@ public final class Settings {
             if ((ver <= 4)) {
                 config.set("colornametags", true);
             }
+            if ((ver <= 5)) {
+            	config.set("chatchannel", "VanishNP");
+            }
             config.set("configVersionDoNotTouch.SeriouslyThisWillEraseYourConfig", Settings.confVersion);
             plugin.saveConfig();
         }
@@ -76,6 +84,7 @@ public final class Settings {
         if (Settings.lightningEffectCount < 1) {
             Settings.lightningEffectCount = 1;
         }
+        Settings.chatChannel = config.getString("chatchannel");
         if (config.getBoolean("debug", false)) {
             Debuggle.itsGoTime(plugin);
         } else {

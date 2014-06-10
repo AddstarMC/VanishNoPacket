@@ -77,6 +77,7 @@ public final class VanishCommand implements CommandExecutor {
                 list.insert(0, "Vanished: ");
                 list.insert(0, ChatColor.DARK_AQUA);
                 sender.sendMessage(list.toString());
+                // TODO: Build global list
             } else {
                 this.denied(sender);
             }

@@ -21,6 +21,8 @@ import org.kitteh.vanish.listeners.ListenToYourHeart;
 import org.kitteh.vanish.listeners.TagAPIListener;
 import org.kitteh.vanish.metrics.MetricsOverlord;
 
+import au.com.addstar.bc.BungeeChat;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -245,6 +247,8 @@ public final class VanishPlugin extends JavaPlugin {
                 player.sendMessage(message);
             }
         }
+        
+        BungeeChat.mirrorChat(message, Settings.getChatChannel());
     }
 
     @Override
@@ -266,6 +270,7 @@ public final class VanishPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         this.setInstance(this);
+        BungeeHelper.initialize(this);
 
         final File check = new File(this.getDataFolder(), "config.yml");
         boolean firstTimeStarting = false;
