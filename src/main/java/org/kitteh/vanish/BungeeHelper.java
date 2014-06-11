@@ -1,6 +1,13 @@
 package org.kitteh.vanish;
 
+import java.util.Map;
+import java.util.UUID;
+import java.util.Map.Entry;
+
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import au.com.addstar.bc.BungeeChat;
@@ -99,6 +106,45 @@ public class BungeeHelper
 			public void onError( String type, String message )
 			{
 				mPlugin.getLogger().severe("Remote call exception while grabbing online status. " + type + ": " + message);
+			}
+		});
+	}
+	
+	public static void printVanishedPlayers(final CommandSender sender)
+	{
+		BungeeChat.getSyncManager().getPropertiesAsync("VNP:vanished", new IMethodCallback<Map<String,Object>>()
+		{
+			@Override
+			public void onFinished( Map<String, Object> data )
+			{
+				StringBuilder list = new StringBuilder();
+				for(Entry<String, Object> entry : data.entrySet())
+				{
+					OfflinePlayer player = Bukkit.getOfflinePlayer(UUID.fromString(entry.getKey()));
+					boolean vanished = (entry.getValue() instanceof Byte && ((Byte)entry.getValue()) != 0);
+					if(vanished)
+					{
+						if (list.length() > 0) 
+						{
+		                    list.append(ChatColor.DARK_AQUA);
+		                    list.append(',');
+		                }
+		                
+						list.append(ChatColor.AQUA);
+		                list.append(player.getName());
+					}
+				}
+				
+				list.insert(0, "Vanished: ");
+		        list.insert(0, ChatColor.DARK_AQUA);
+		        sender.sendMessage(list.toString());
+			}
+			
+			@Override
+			public void onError( String type, String message )
+			{
+				sender.sendMessage(ChatColor.RED + "An internal server error occured.");
+				mPlugin.getLogger().severe("Remote call exception while grabbing vanish list. " + type + ": " + message);
 			}
 		});
 	}
