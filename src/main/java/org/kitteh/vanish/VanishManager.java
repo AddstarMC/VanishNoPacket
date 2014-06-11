@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableSet;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.Entity;
@@ -16,6 +17,7 @@ import org.kitteh.vanish.metrics.MetricsOverlord;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
@@ -65,6 +67,7 @@ public final class VanishManager {
 
     private final VanishPlugin plugin;
     private final Set<String> vanishedPlayerNames = Collections.synchronizedSet(new HashSet<String>());
+    private final HashMap<UUID, Long> recentlyQuitVanishedPlayers = new HashMap<UUID, Long>();
     private final Map<String, Boolean> sleepIgnored = new HashMap<String, Boolean>();
     private final Set<UUID> bats = new HashSet<UUID>();
     private final VanishAnnounceManipulator announceManipulator;
@@ -131,6 +134,14 @@ public final class VanishManager {
         Debuggle.log("Testing vanished status of " + playerName + ": null");
         return false;
     }
+    
+    public boolean wasVanishedUponQuit(OfflinePlayer player)
+    {
+    	Long time = recentlyQuitVanishedPlayers.get(player.getUniqueId());
+    	if(time == null || System.currentTimeMillis() - time >= 1000)
+    		return false;
+    	return true;
+    }
 
     /**
      * Gets the number of vanished players
@@ -141,6 +152,17 @@ public final class VanishManager {
         return this.vanishedPlayerNames.size();
     }
 
+    public void clearRecentQuits()
+    {
+    	Iterator<Long> it = recentlyQuitVanishedPlayers.values().iterator();
+    	while(it.hasNext())
+    	{
+    		Long time = it.next();
+    		if(System.currentTimeMillis() - time >= 1000)
+    			it.remove();
+    	}
+    }
+    
     /**
      * Marks a player as having quit the game
      * Do not call this method
@@ -151,6 +173,10 @@ public final class VanishManager {
         Debuggle.log("Quitting: " + player.getName());
         this.resetSleepingIgnored(player);
         VanishPerms.userQuit(player);
+        if(isVanished(player))
+        	recentlyQuitVanishedPlayers.put(player.getUniqueId(), System.currentTimeMillis());
+        
+        clearRecentQuits();
         this.removeVanished(player.getName());
         for (Player otherPlayer : this.plugin.getServer().getOnlinePlayers()) {
             otherPlayer.showPlayer(player);
@@ -163,6 +189,7 @@ public final class VanishManager {
      * @param player player to refresh
      */
     public void playerRefresh(Player player) {
+    	clearRecentQuits();
         this.resetSeeing(player);
         if (this.isVanished(player) && !VanishPerms.canVanish(player)) {
             this.toggleVanish(player);

@@ -30,6 +30,8 @@ import org.kitteh.vanish.VanishPerms;
 import org.kitteh.vanish.VanishPlugin;
 import org.kitteh.vanish.metrics.MetricsOverlord;
 
+import au.com.addstar.bc.ProxyLeaveEvent;
+
 public final class ListenPlayerOther implements Listener {
     private final VanishPlugin plugin;
 
@@ -132,12 +134,15 @@ public final class ListenPlayerOther implements Listener {
     }
 
     @EventHandler
+    public void onPlayerQuitProxy(ProxyLeaveEvent event)
+    {
+    	if(plugin.getManager().isVanished(event.getPlayer().getName()) || plugin.getManager().wasVanishedUponQuit(event.getPlayer()))
+    		plugin.messageStatusUpdate(ChatColor.DARK_AQUA + event.getPlayer().getName() + " has quit vanished");
+    }
+    
+    @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
         final Player player = event.getPlayer();
-//        if (this.plugin.getManager().isVanished(player)) {
-//            this.plugin.messageStatusUpdate(ChatColor.DARK_AQUA + event.getPlayer().getName() + " has quit vanished");
-//        }
-        // TODO: Add a way for the quit message to be added over proxy
         this.plugin.getManager().playerQuit(player);
         this.plugin.hooksQuit(player);
         this.plugin.getManager().getAnnounceManipulator().dropDelayedAnnounce(player.getName());
