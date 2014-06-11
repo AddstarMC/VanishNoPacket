@@ -84,6 +84,7 @@ public final class ListenPlayerJoin implements Listener {
 			{
 				BungeeHelper.setTabGroup(event.getPlayer(), vanish);
 				BungeeHelper.loadStateFromProxy(event.getPlayer());
+				BungeeHelper.setSeeState(event.getPlayer(), VanishPerms.canSeeAll(event.getPlayer()));
 			}
 		}, 10);
     }

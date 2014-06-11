@@ -42,6 +42,14 @@ public class BungeeHelper
 		BungeeChat.getSyncManager().setPlayerProperty(player.getName(), "hasQuitMessage", online);
 	}
 	
+	public static void setSeeState(Player player, boolean canSee)
+	{
+		if(canSee)
+			BungeeChat.getSyncManager().setPlayerProperty(player.getName(), "TL:see:vanish", true);
+		else
+			BungeeChat.getSyncManager().setPlayerProperty(player.getName(), "TL:see:vanish", null);
+	}
+	
 	public static void broadcastMessage(String message)
 	{
 		Bukkit.broadcastMessage(message);

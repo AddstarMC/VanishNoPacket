@@ -204,9 +204,11 @@ public final class VanishManager {
     public void resetSeeing(Player player) {
         Debuggle.log("Resetting visibility on " + player.getName());
         if (VanishPerms.canSeeAll(player)) {
+        	BungeeHelper.setSeeState(player, true);
             this.showVanished(player);
             Debuggle.log("Showing all to " + player.getName());
         } else {
+        	BungeeHelper.setSeeState(player, false);
             this.hideVanished(player);
             Debuggle.log("Hiding all to " + player.getName());
         }
