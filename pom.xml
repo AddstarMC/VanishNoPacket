@@ -6,57 +6,19 @@
   <packaging>jar</packaging>
 
   <name>VanishNoPacket</name>
-  <version>3.19.2-SNAPSHOT</version>
+  <version>3.19.2bungee-SNAPSHOT</version>
 
-  <url>http://github.com/mbax/VanishNoPacket</url>
+  <url>http://github.com/Schmoller/VanishNoPacket</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <vnp-version>${project.version}-unofficial</vnp-version>
+    <vnp-version>${project.version}-${env.BUILD_NUMBER}</vnp-version>
   </properties>
 
-  <profiles>
-    <profile>
-      <id>jenkins</id>
-      <properties>
-        <vnp-version>${project.version}-${buildNumber}</vnp-version>
-      </properties>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>buildnumber-maven-plugin</artifactId>
-            <version>1.2</version>
-            <executions>
-              <execution>
-                <phase>validate</phase>
-                <goals>
-                  <goal>create</goal>
-                </goals>
-              </execution>
-            </executions>
-            <configuration>
-              <doCheck>true</doCheck>
-              <revisionOnScmFailure>no-rev</revisionOnScmFailure>
-              <scmDirectory>../../</scmDirectory>
-              <shortRevisionLength>7</shortRevisionLength>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    <profile>
-      <id>release</id>
-      <properties>
-        <vnp-version>${project.version}</vnp-version>
-      </properties>
-    </profile>
-  </profiles>
-
   <scm>
-    <connection>scm:git:git://github.com/mbax/VanishNoPacket.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com/mbax/VanishNoPacket.git</developerConnection>
-    <url>https://github.com/mbax/VanishNoPacket</url>
+    <connection>scm:git:git://github.com/Schmoller/VanishNoPacket.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/Schmoller/VanishNoPacket.git</developerConnection>
+    <url>https://github.com/Schmoller/VanishNoPacket</url>
   </scm>
 
   <repositories>
@@ -197,19 +159,6 @@
       <version>1.0.0-SNAPSHOT</version>
     </dependency>
   </dependencies>
-
-  <distributionManagement>
-    <repository>
-      <id>kittehReleases</id>
-      <name>Kitteh Releases</name>
-      <url>http://repo.kitteh.org/content/repositories/releases</url>
-    </repository>
-    <snapshotRepository>
-      <id>kittehSnapshots</id>
-      <name>Kitteh Snapshots</name>
-      <url>http://repo.kitteh.org/content/repositories/snapshots</url>
-    </snapshotRepository>
-  </distributionManagement>
 
   <build>
     <finalName>${project.artifactId}</finalName>
