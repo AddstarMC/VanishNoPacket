@@ -30,7 +30,7 @@ import org.kitteh.vanish.VanishPerms;
 import org.kitteh.vanish.VanishPlugin;
 import org.kitteh.vanish.metrics.MetricsOverlord;
 
-import au.com.addstar.bc.ProxyLeaveEvent;
+import au.com.addstar.bc.event.ProxyLeaveEvent;
 
 public final class ListenPlayerOther implements Listener {
     private final VanishPlugin plugin;

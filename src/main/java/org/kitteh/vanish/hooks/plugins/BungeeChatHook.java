@@ -5,7 +5,7 @@ import org.bukkit.event.Listener;
 import org.kitteh.vanish.VanishPlugin;
 import org.kitteh.vanish.hooks.Hook;
 
-import au.com.addstar.bc.AFKChangeEvent;
+import au.com.addstar.bc.event.AFKChangeEvent;
 
 public final class BungeeChatHook extends Hook implements Listener 
 {

@@ -24,30 +24,30 @@ public class BungeeHelper
 	
 	public static void setVanishState(Player player, boolean vanished)
 	{
-		BungeeChat.getSyncManager().setPlayerProperty(player.getName(), "VNP:vanished", vanished);
+		BungeeChat.getSyncManager().setPlayerProperty(player.getUniqueId(), "VNP:vanished", vanished);
 		setTabGroup(player, vanished);
 	}
 	
 	public static void setTabGroup(Player player, boolean vanished)
 	{
 		if(vanished)
-			BungeeChat.getSyncManager().setPlayerProperty(player.getName(), "TL:group:vanish", true);
+			BungeeChat.getSyncManager().setPlayerProperty(player.getUniqueId(), "TL:group:vanish", true);
 		else
-			BungeeChat.getSyncManager().setPlayerProperty(player.getName(), "TL:group:vanish", null);
+			BungeeChat.getSyncManager().setPlayerProperty(player.getUniqueId(), "TL:group:vanish", null);
 	}
 	
 	public static void setOnlineState(Player player, boolean online)
 	{
-		BungeeChat.getSyncManager().setPlayerProperty(player.getName(), "VNP:online", online);
-		BungeeChat.getSyncManager().setPlayerProperty(player.getName(), "hasQuitMessage", online);
+		BungeeChat.getSyncManager().setPlayerProperty(player.getUniqueId(), "VNP:online", online);
+		BungeeChat.getSyncManager().setPlayerProperty(player.getUniqueId(), "hasQuitMessage", online);
 	}
 	
 	public static void setSeeState(Player player, boolean canSee)
 	{
 		if(canSee)
-			BungeeChat.getSyncManager().setPlayerProperty(player.getName(), "TL:see:vanish", true);
+			BungeeChat.getSyncManager().setPlayerProperty(player.getUniqueId(), "TL:see:vanish", true);
 		else
-			BungeeChat.getSyncManager().setPlayerProperty(player.getName(), "TL:see:vanish", null);
+			BungeeChat.getSyncManager().setPlayerProperty(player.getUniqueId(), "TL:see:vanish", null);
 	}
 	
 	public static void broadcastMessage(String message)
@@ -66,7 +66,7 @@ public class BungeeHelper
 	
 	private static void loadVanishStatus(final Player player)
 	{
-		BungeeChat.getSyncManager().getPlayerPropertyAsync(player.getName(), "VNP:vanished", new IMethodCallback<Object>()
+		BungeeChat.getSyncManager().getPlayerPropertyAsync(player.getUniqueId(), "VNP:vanished", new IMethodCallback<Object>()
 		{
 			@Override
 			public void onFinished( Object isVanished )
@@ -97,7 +97,7 @@ public class BungeeHelper
 	
 	private static void loadOnlineStatus(final Player player)
 	{
-		BungeeChat.getSyncManager().getPlayerPropertyAsync(player.getName(), "VNP:online", new IMethodCallback<Object>()
+		BungeeChat.getSyncManager().getPlayerPropertyAsync(player.getUniqueId(), "VNP:online", new IMethodCallback<Object>()
 		{
 			@Override
 			public void onFinished( Object status )
@@ -107,7 +107,7 @@ public class BungeeHelper
 				mPlugin.getManager().getAnnounceManipulator().setFakeOnlineStatus(player.getName(), online);
 				
 				if(!online && VanishPerms.joinWithoutAnnounce(player))
-					BungeeChat.getSyncManager().setPlayerProperty(player.getName(), "hasQuitMessage", false);
+					BungeeChat.getSyncManager().setPlayerProperty(player.getUniqueId(), "hasQuitMessage", false);
 			}
 			
 			@Override

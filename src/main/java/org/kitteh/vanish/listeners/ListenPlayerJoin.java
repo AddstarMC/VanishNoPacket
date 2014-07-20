@@ -14,7 +14,7 @@ import org.kitteh.vanish.VanishPerms;
 import org.kitteh.vanish.VanishPlugin;
 import org.kitteh.vanish.metrics.MetricsOverlord;
 
-import au.com.addstar.bc.ProxyJoinEvent;
+import au.com.addstar.bc.event.ProxyJoinEvent;
 
 public final class ListenPlayerJoin implements Listener {
     private final VanishPlugin plugin;
