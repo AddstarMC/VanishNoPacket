@@ -71,7 +71,7 @@ public class BungeeHelper
 			@Override
 			public void onFinished( Object isVanished )
 			{
-				if(!(isVanished instanceof Byte) || ((Byte)isVanished) == 0)
+				if(!(isVanished instanceof Boolean) || !(Boolean)isVanished)
 				{
 					if(mPlugin.getManager().isVanished(player))
 						mPlugin.getManager().toggleVanishQuiet(player, false, false);
@@ -102,7 +102,7 @@ public class BungeeHelper
 			@Override
 			public void onFinished( Object status )
 			{
-				boolean online = (status instanceof Byte) && ((Byte)status) == 1;
+				boolean online = (status instanceof Boolean) && (Boolean)status;
 				
 				mPlugin.getManager().getAnnounceManipulator().setFakeOnlineStatus(player.getName(), online);
 				
@@ -129,7 +129,7 @@ public class BungeeHelper
 				for(Entry<String, Object> entry : data.entrySet())
 				{
 					OfflinePlayer player = Bukkit.getOfflinePlayer(UUID.fromString(entry.getKey()));
-					boolean vanished = (entry.getValue() instanceof Byte && ((Byte)entry.getValue()) != 0);
+					boolean vanished = (entry.getValue() instanceof Boolean && (Boolean)entry.getValue());
 					if(vanished)
 					{
 						if (list.length() > 0) 
