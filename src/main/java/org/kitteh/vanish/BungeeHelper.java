@@ -50,6 +50,14 @@ public class BungeeHelper
 			BungeeChat.getSyncManager().setPlayerProperty(player.getUniqueId(), "TL:see:vanish", null);
 	}
 	
+	public static void setToggleState(Player player)
+	{
+		VanishUser user = VanishPerms.getUser(player);
+		int state = user.getState();
+		
+		BungeeChat.getSyncManager().setPlayerProperty(player.getUniqueId(), "VNP:toggles", state);
+	}
+	
 	public static void broadcastMessage(String message)
 	{
 		Bukkit.broadcastMessage(message);
@@ -62,6 +70,7 @@ public class BungeeHelper
 			loadOnlineStatus(player);
 		
 		loadVanishStatus(player);
+		loadToggles(player);
 	}
 	
 	private static void loadVanishStatus(final Player player)
@@ -114,6 +123,27 @@ public class BungeeHelper
 			public void onError( String type, String message )
 			{
 				mPlugin.getLogger().severe("Remote call exception while grabbing online status. " + type + ": " + message);
+			}
+		});
+	}
+	
+	private static void loadToggles(final Player player)
+	{
+		BungeeChat.getSyncManager().getPlayerPropertyAsync(player.getUniqueId(), "VNP:toggles", new IMethodCallback<Object>()
+		{
+			@Override
+			public void onFinished( Object status )
+			{
+				int state = (status instanceof Number ? ((Number)status).intValue() : 0);
+				
+				VanishUser user = VanishPerms.getUser(player);
+				user.loadState(state);
+			}
+			
+			@Override
+			public void onError( String type, String message )
+			{
+				mPlugin.getLogger().severe("Remote call exception while grabbing toggles. " + type + ": " + message);
 			}
 		});
 	}

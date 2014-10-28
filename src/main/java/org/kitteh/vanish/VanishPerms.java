@@ -242,7 +242,7 @@ public final class VanishPerms {
         VanishPerms.users.remove(player.getName());
     }
 
-    private static VanishUser getUser(Player player) {
+    public static VanishUser getUser(Player player) {
         VanishUser user = VanishPerms.users.get(player.getName());
         if (user == null) {
             user = new VanishUser(player);
