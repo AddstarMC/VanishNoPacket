@@ -134,10 +134,15 @@ public class BungeeHelper
 			@Override
 			public void onFinished( Object status )
 			{
-				int state = (status instanceof Number ? ((Number)status).intValue() : 0);
-				
-				VanishUser user = VanishPerms.getUser(player);
-				user.loadState(state);
+				if (status != null)
+				{
+					int state = (status instanceof Number ? ((Number)status).intValue() : 0);
+					
+					VanishUser user = VanishPerms.getUser(player);
+					user.loadState(state);
+				}
+				else
+					BungeeChat.getSyncManager().setPlayerProperty(player.getUniqueId(), "VNP:toggles", VanishPerms.getUser(player).getState());
 			}
 			
 			@Override
