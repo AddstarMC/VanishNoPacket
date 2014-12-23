@@ -138,6 +138,8 @@ public final class ListenPlayerOther implements Listener {
     {
     	if(plugin.getManager().isVanished(event.getPlayer().getName()) || plugin.getManager().wasVanishedUponQuit(event.getPlayer()))
     		plugin.messageStatusUpdate(ChatColor.DARK_AQUA + event.getPlayer().getName() + " has quit vanished");
+    	else if (!plugin.getManager().getAnnounceManipulator().getFakeOnlineStatus(event.getPlayer().getName()))
+    		plugin.messageStatusUpdate(ChatColor.DARK_AQUA + event.getPlayer().getName() + " has quit silently");
     }
     
     @EventHandler
