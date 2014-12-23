@@ -178,9 +178,6 @@ public final class VanishManager {
         
         clearRecentQuits();
         this.removeVanished(player.getName());
-        for (Player otherPlayer : this.plugin.getServer().getOnlinePlayers()) {
-            otherPlayer.showPlayer(player);
-        }
     }
 
     /**
