@@ -125,8 +125,9 @@ public final class VanishCommand implements CommandExecutor {
                 }
                 player.sendMessage(toggleReply.toString());
             } else {
-                // I wish to toggle something
-                this.toggle(player, args[1]);
+                // I wish to toggle (multiple) somethings
+                for(int i=1;i<args.length;i++)
+                    this.toggle(player, args[i]);
             }
             return true;
         }
