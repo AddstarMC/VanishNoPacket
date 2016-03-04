@@ -14,6 +14,7 @@ import org.bukkit.plugin.messaging.PluginMessageListener;
 import org.kitteh.vanish.event.VanishStatusChangeEvent;
 import org.kitteh.vanish.metrics.MetricsOverlord;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -281,7 +282,7 @@ public final class VanishManager {
             Debuggle.log("It's invisible time! " + vanishingPlayer.getName());
             this.setSleepingIgnored(vanishingPlayer);
             if (VanishPerms.canNotFollow(vanishingPlayer)) {
-                for (final Entity entity : vanishingPlayer.getNearbyEntities(100, 100, 100)) {
+                for (final Entity entity : vanishingPlayer.getNearbyEntities(70, 70, 70)) {
                     if ((entity != null) && (entity instanceof Creature)) {
                         final Creature creature = ((Creature) entity);
                         if ((creature != null) && (creature.getTarget() != null) && creature.getTarget().equals(vanishingPlayer)) {
@@ -320,7 +321,7 @@ public final class VanishManager {
         }
         this.plugin.getServer().getPluginManager().callEvent(new VanishStatusChangeEvent(vanishingPlayer, vanishing));
         vanishingPlayer.sendPluginMessage(this.plugin, "vanishStatus", vanishing ? new byte[] { 0x01 } : new byte[] { 0x00 });
-        final Player[] playerList = this.plugin.getServer().getOnlinePlayers();
+        final Collection<? extends Player> playerList = this.plugin.getServer().getOnlinePlayers();
         for (final Player otherPlayer : playerList) {
             if (vanishingPlayer.equals(otherPlayer)) {
                 continue;
