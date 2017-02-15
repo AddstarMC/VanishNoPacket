@@ -15,7 +15,7 @@
   </properties>
   <scm>
     <connection>scm:git:git@github.com:AddstarMC/VanishNoPacket.git</connection>
-    <developerConnection>scm:git:git@github.com/AddstarMC/VanishNoPacket.git</developerConnection>
+    <developerConnection>scm:git:git@github.com:AddstarMC/VanishNoPacket.git</developerConnection>
     <url>https://github.com/AddstarMC/VanishNoPacket</url>
   </scm>
   <developers>
