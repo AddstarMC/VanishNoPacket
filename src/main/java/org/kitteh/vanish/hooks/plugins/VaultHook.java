@@ -15,12 +15,10 @@ public final class VaultHook extends Hook implements ChatProvider {
         super(plugin);
     }
 
-    @Override
     public String getPrefix(Player player) {
         return this.whatsInTheVault() ? this.getVaultPrefix(player) : "";
     }
 
-    @Override
     public String getSuffix(Player player) {
         return this.whatsInTheVault() ? this.getVaultSuffix(player) : "";
     }

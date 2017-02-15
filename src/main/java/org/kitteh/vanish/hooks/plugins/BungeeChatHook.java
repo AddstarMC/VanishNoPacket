@@ -17,13 +17,14 @@ public final class BungeeChatHook extends Hook implements Listener
     @Override
     public void onEnable() 
     {
-        plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
+        this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
     }
 
     @EventHandler
     private void onAFKChange(AFKChangeEvent event)
     {
-    	if(plugin.getManager().isVanished(event.getPlayer()))
+    	if(this.plugin.getManager().isVanished(event.getPlayer()))
     		event.setCancelled(true);
     }
+
 }

@@ -26,6 +26,7 @@ public final class VanishNoPacket {
      * @deprecated Use the Bukkit API
      */
     @Deprecated
+    @SuppressWarnings("deprecation")
     public static boolean canSee(Player looking, Player uncertain) throws VanishNotLoadedException {
         VanishNoPacket.check();
         return !(VanishNoPacket.instance.getManager().isVanished(uncertain) && !VanishPerms.canSeeAll(looking));
@@ -40,6 +41,7 @@ public final class VanishNoPacket {
      * @deprecated Use the Bukkit API
      */
     @Deprecated
+    @SuppressWarnings("deprecation")
     public static VanishManager getManager() throws VanishNotLoadedException {
         VanishNoPacket.check();
         return VanishNoPacket.instance.getManager();
@@ -54,6 +56,7 @@ public final class VanishNoPacket {
      * @deprecated Use the Bukkit API
      */
     @Deprecated
+    @SuppressWarnings("deprecation")
     public static VanishPlugin getPlugin() throws VanishNotLoadedException {
         VanishNoPacket.check();
         return VanishNoPacket.instance;
@@ -68,6 +71,7 @@ public final class VanishNoPacket {
      * @deprecated Use the player metadata
      */
     @Deprecated
+    @SuppressWarnings("deprecation")
     public static boolean isVanished(String name) throws VanishNotLoadedException {
         VanishNoPacket.check();
         return VanishNoPacket.instance.getManager().isVanished(name);
@@ -81,6 +85,7 @@ public final class VanishNoPacket {
      * @deprecated Use player metadata and count.
      */
     @Deprecated
+    @SuppressWarnings("deprecation")
     public static int numVanished() throws VanishNotLoadedException {
         VanishNoPacket.check();
         return VanishNoPacket.instance.getManager().numVanished();
@@ -93,6 +98,7 @@ public final class VanishNoPacket {
      * @deprecated SERIOUSLY WHAT ARE YOU DOING
      */
     @Deprecated
+    @SuppressWarnings("deprecation")
     public static void setInstance(VanishPlugin instance) {
         VanishNoPacket.instance = instance;
         VanishNoPacket.mainThread = Thread.currentThread();
@@ -106,6 +112,7 @@ public final class VanishNoPacket {
      * @deprecated Call non-statically, getting the VanishManager via Bukkit
      */
     @Deprecated
+    @SuppressWarnings("deprecation")
     public static void toggleVanishSilent(Player player) throws VanishNotLoadedException {
         VanishNoPacket.check(false);
         VanishNoPacket.instance.getManager().toggleVanishQuiet(player);
@@ -120,15 +127,17 @@ public final class VanishNoPacket {
      * @deprecated Call non-statically, getting the VanishManager via Bukkit
      */
     @Deprecated
+    @SuppressWarnings("deprecation")
     public static void toggleVanishWithAnnounce(Player player) throws VanishNotLoadedException {
         VanishNoPacket.check(false);
         VanishNoPacket.instance.getManager().toggleVanish(player);
     }
 
+    @SuppressWarnings("deprecation")
     private static void check() throws VanishNotLoadedException {
         VanishNoPacket.check(true);
     }
-
+    @SuppressWarnings("deprecation")
     private static void check(boolean safe) throws VanishNotLoadedException {
         if (VanishNoPacket.instance == null) {
             throw new VanishNotLoadedException();

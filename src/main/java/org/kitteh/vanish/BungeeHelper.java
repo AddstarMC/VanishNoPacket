@@ -77,7 +77,6 @@ public class BungeeHelper
 	{
 		BungeeChat.getSyncManager().getPlayerPropertyAsync(player.getUniqueId(), "VNP:vanished", new IMethodCallback<Object>()
 		{
-			@Override
 			public void onFinished( Object isVanished )
 			{
 				if(!(isVanished instanceof Boolean) || !(Boolean)isVanished)
@@ -96,7 +95,6 @@ public class BungeeHelper
 				}
 			}
 			
-			@Override
 			public void onError( String type, String message )
 			{
 				mPlugin.getLogger().severe("Remote call exception while grabbing vanish status. " + type + ": " + message);
@@ -108,7 +106,6 @@ public class BungeeHelper
 	{
 		BungeeChat.getSyncManager().getPlayerPropertyAsync(player.getUniqueId(), "VNP:online", new IMethodCallback<Object>()
 		{
-			@Override
 			public void onFinished( Object status )
 			{
 				boolean online = (status instanceof Boolean) && (Boolean)status;
@@ -119,7 +116,6 @@ public class BungeeHelper
 					BungeeChat.getSyncManager().setPlayerProperty(player.getUniqueId(), "hasQuitMessage", false);
 			}
 			
-			@Override
 			public void onError( String type, String message )
 			{
 				mPlugin.getLogger().severe("Remote call exception while grabbing online status. " + type + ": " + message);
@@ -131,7 +127,6 @@ public class BungeeHelper
 	{
 		BungeeChat.getSyncManager().getPlayerPropertyAsync(player.getUniqueId(), "VNP:toggles", new IMethodCallback<Object>()
 		{
-			@Override
 			public void onFinished( Object status )
 			{
 				if (status != null)
@@ -145,7 +140,6 @@ public class BungeeHelper
 					BungeeChat.getSyncManager().setPlayerProperty(player.getUniqueId(), "VNP:toggles", VanishPerms.getUser(player).getState());
 			}
 			
-			@Override
 			public void onError( String type, String message )
 			{
 				mPlugin.getLogger().severe("Remote call exception while grabbing toggles. " + type + ": " + message);
@@ -157,7 +151,6 @@ public class BungeeHelper
 	{
 		BungeeChat.getSyncManager().getPropertiesAsync("VNP:vanished", new IMethodCallback<Map<String,Object>>()
 		{
-			@Override
 			public void onFinished( Map<String, Object> data )
 			{
 				StringBuilder list = new StringBuilder();
@@ -183,7 +176,6 @@ public class BungeeHelper
 		        sender.sendMessage(list.toString());
 			}
 			
-			@Override
 			public void onError( String type, String message )
 			{
 				sender.sendMessage(ChatColor.RED + "An internal server error occured.");

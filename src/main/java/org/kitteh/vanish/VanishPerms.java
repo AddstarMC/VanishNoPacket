@@ -8,7 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public final class VanishPerms {
-    private static Map<String, VanishUser> users = Collections.synchronizedMap(new HashMap<String, VanishUser>());
+    private static final Map<String, VanishUser> users = Collections.synchronizedMap(new HashMap<String, VanishUser>());
 
     public static boolean blockIncomingDamage(Player player) {
         return VanishPerms.getUser(player).getPreventIncomingDamage();

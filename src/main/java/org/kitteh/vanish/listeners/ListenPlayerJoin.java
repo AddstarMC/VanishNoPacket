@@ -27,7 +27,7 @@ public final class ListenPlayerJoin implements Listener {
     public void onPlayerJoinEarly(ProxyJoinEvent event) {
         if (VanishPerms.joinVanished(event.getPlayer())) {
             MetricsOverlord.getJoinInvisTracker().increment();
-            if(!plugin.getManager().isVanished(event.getPlayer())) // Changed: Added check for is vanished
+            if(!this.plugin.getManager().isVanished(event.getPlayer())) // Changed: Added check for is vanished
             	this.plugin.getManager().toggleVanishQuiet(event.getPlayer(), false, true);
             BungeeHelper.setVanishState(event.getPlayer(), true);
             this.plugin.hooksVanish(event.getPlayer());
@@ -70,16 +70,15 @@ public final class ListenPlayerJoin implements Listener {
     	event.getPlayer().setMetadata("vanished", new LazyMetadataValue(this.plugin, CacheStrategy.NEVER_CACHE, new VanishCheck(this.plugin.getManager(), event.getPlayer().getName())));
         this.plugin.getManager().resetSeeing(event.getPlayer());
         
-        // Force players to be vanished (if they can vanish) so they dont show up if they are ment to be vanished
+        // Force players to be vanished (if they can vanish) so they dont show up if they are meant to be vanished
     	if(VanishPerms.canVanish(event.getPlayer()))
-    		plugin.getManager().toggleVanishQuiet(event.getPlayer(), false, false);
+            this.plugin.getManager().toggleVanishQuiet(event.getPlayer(), false, false);
     	
-    	final boolean vanish = plugin.getManager().isVanished(event.getPlayer());
+    	final boolean vanish = this.plugin.getManager().isVanished(event.getPlayer());
     	
     	// Update all states from stored data
-    	Bukkit.getScheduler().runTaskLater(plugin, new Runnable()
+    	Bukkit.getScheduler().runTaskLater(this.plugin, new Runnable()
 		{
-			@Override
 			public void run()
 			{
 				BungeeHelper.setTabGroup(event.getPlayer(), vanish);

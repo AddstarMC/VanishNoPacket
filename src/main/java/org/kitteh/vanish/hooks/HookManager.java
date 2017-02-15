@@ -8,31 +8,18 @@ import java.util.Map;
 import org.bukkit.entity.Player;
 import org.kitteh.vanish.Debuggle;
 import org.kitteh.vanish.VanishPlugin;
-import org.kitteh.vanish.hooks.plugins.BPermissionsHook;
-import org.kitteh.vanish.hooks.plugins.BungeeChatHook;
-import org.kitteh.vanish.hooks.plugins.DisguiseCraftHook;
-import org.kitteh.vanish.hooks.plugins.DynmapHook;
-import org.kitteh.vanish.hooks.plugins.EssentialsHook;
-import org.kitteh.vanish.hooks.plugins.GeoIPToolsHook;
-import org.kitteh.vanish.hooks.plugins.JSONAPIHook;
-import org.kitteh.vanish.hooks.plugins.ProtocolLibHook;
-import org.kitteh.vanish.hooks.plugins.SpoutCraftHook;
-import org.kitteh.vanish.hooks.plugins.VaultHook;
+import org.kitteh.vanish.hooks.plugins.*;
 
 public final class HookManager {
     public enum HookType {
-        BPermissions(BPermissionsHook.class),
-        DisguiseCraft(DisguiseCraftHook.class),
+        LibsDisguise(LibsDisguiseApiHook.class),
         Dynmap(DynmapHook.class),
         Essentials(EssentialsHook.class),
-        GeoIPTools(GeoIPToolsHook.class),
-        JSONAPI(JSONAPIHook.class),
         ProtocolLib(ProtocolLibHook.class),
-        SpoutCraft(SpoutCraftHook.class),
         Vault(VaultHook.class),
         BungeeChat(BungeeChatHook.class);
 
-        private Class<? extends Hook> clazz;
+        private final Class<? extends Hook> clazz;
 
         HookType(Class<? extends Hook> clazz) {
             this.clazz = clazz;
@@ -73,7 +60,7 @@ public final class HookManager {
      * @param name hook name to deregister
      * @return the deregistered hook or null if no hook by the given name was registered
      */
-    public Hook deregisterHook(String name) {
+    private Hook deregisterHook(String name) {
         final Hook ret = this.hooks.get(name);
         this.hooks.remove(name);
         return ret;
@@ -138,7 +125,7 @@ public final class HookManager {
      * @param name name to register
      * @param hookClazz hook class to register
      */
-    public void registerHook(String name, Class<? extends Hook> hookClazz) {
+    private void registerHook(String name, Class<? extends Hook> hookClazz) {
         try {
             this.registerHook(name, hookClazz.getConstructor(VanishPlugin.class).newInstance(this.plugin));
         } catch (final Exception e) {
@@ -153,7 +140,7 @@ public final class HookManager {
      * @param name name of the hook
      * @param hook hook object
      */
-    public void registerHook(String name, Hook hook) {
+    private void registerHook(String name, Hook hook) {
         this.hooks.put(name, hook);
     }
 

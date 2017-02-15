@@ -11,7 +11,6 @@ public final class VanishCheck implements Callable<Object> {
         this.name = name;
     }
 
-    @Override
     public Object call() {
         try {
             return this.manager.isVanished(this.name);

@@ -7,14 +7,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.kitteh.vanish.metrics.MetricsOverlord;
 
-public final class VanishCommand implements CommandExecutor {
+final class VanishCommand implements CommandExecutor {
     private final VanishPlugin plugin;
 
     public VanishCommand(VanishPlugin plugin) {
         this.plugin = plugin;
     }
 
-    @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         MetricsOverlord.getCommandTracker().increment();
         // First, the short aliases

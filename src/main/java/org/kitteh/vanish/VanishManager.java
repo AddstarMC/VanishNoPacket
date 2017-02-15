@@ -24,6 +24,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 
+@SuppressWarnings("JavaDoc")
 public final class VanishManager {
     private final class ShowPlayerEntry {
         private final Player player;
@@ -44,14 +45,13 @@ public final class VanishManager {
     }
 
     private final class ShowPlayerHandler implements Runnable {
-        Set<ShowPlayerEntry> entries = new HashSet<ShowPlayerEntry>();
-        Set<ShowPlayerEntry> next = new HashSet<ShowPlayerEntry>();
+        final Set<ShowPlayerEntry> entries = new HashSet<ShowPlayerEntry>();
+        final Set<ShowPlayerEntry> next = new HashSet<ShowPlayerEntry>();
 
         public void add(ShowPlayerEntry player) {
             this.entries.add(player);
         }
 
-        @Override
         public void run() {
             for (final ShowPlayerEntry entry : this.next) {
                 final Player player = entry.getPlayer();
@@ -81,7 +81,7 @@ public final class VanishManager {
         this.plugin.getServer().getScheduler().scheduleSyncRepeatingTask(this.plugin, this.showPlayer, 4, 4);
 
         this.plugin.getServer().getMessenger().registerIncomingPluginChannel(this.plugin, "vanishStatus", new PluginMessageListener() {
-            @Override
+
             public void onPluginMessageReceived(String channel, Player player, byte[] message) {
                 if (channel.equals("vanishStatus") && new String(message).equals("check")) {
                     player.sendPluginMessage(plugin, "vanishStatus", VanishManager.this.isVanished(player) ? new byte[] { 0x01 } : new byte[] { 0x00 });
@@ -138,7 +138,7 @@ public final class VanishManager {
     
     public boolean wasVanishedUponQuit(OfflinePlayer player)
     {
-    	Long time = recentlyQuitVanishedPlayers.get(player.getUniqueId());
+    	Long time = this.recentlyQuitVanishedPlayers.get(player.getUniqueId());
     	if(time == null || System.currentTimeMillis() - time >= 1000)
     		return false;
     	return true;
@@ -153,9 +153,9 @@ public final class VanishManager {
         return this.vanishedPlayerNames.size();
     }
 
-    public void clearRecentQuits()
+    private void clearRecentQuits()
     {
-    	Iterator<Long> it = recentlyQuitVanishedPlayers.values().iterator();
+    	Iterator<Long> it = this.recentlyQuitVanishedPlayers.values().iterator();
     	while(it.hasNext())
     	{
     		Long time = it.next();
@@ -175,7 +175,7 @@ public final class VanishManager {
         this.resetSleepingIgnored(player);
         VanishPerms.userQuit(player);
         if(isVanished(player))
-        	recentlyQuitVanishedPlayers.put(player.getUniqueId(), System.currentTimeMillis());
+            this.recentlyQuitVanishedPlayers.put(player.getUniqueId(), System.currentTimeMillis());
         
         clearRecentQuits();
         this.removeVanished(player.getName());
@@ -294,14 +294,14 @@ public final class VanishManager {
             this.vanishedPlayerNames.add(vanishingPlayerName);
             MetricsOverlord.getVanishTracker().increment();
             this.plugin.getLogger().info(vanishingPlayerName + " disappeared.");
-            vanishingPlayer.spigot().setCollidesWithEntities(false);
+            vanishingPlayer.setCollidable(false);
         } else {
             Debuggle.log("It's visible time! " + vanishingPlayer.getName());
             this.resetSleepingIgnored(vanishingPlayer);
             this.removeVanished(vanishingPlayerName);
             MetricsOverlord.getUnvanishTracker().increment();
             this.plugin.getLogger().info(vanishingPlayerName + " reappeared.");
-            vanishingPlayer.spigot().setCollidesWithEntities(true);
+            vanishingPlayer.setCollidable(true);
         }
         if (effects) {
             final Location oneUp = vanishingPlayer.getLocation().add(0, 1, 0);
@@ -358,7 +358,6 @@ public final class VanishManager {
         }
         this.bats.addAll(batty);
         this.plugin.getServer().getScheduler().runTaskLater(this.plugin, new Runnable() {
-            @Override
             public void run() {
                 VanishManager.this.effectBatsCleanup(location.getWorld(), batty);
                 VanishManager.this.bats.removeAll(batty);
@@ -447,13 +446,13 @@ public final class VanishManager {
         }
     }
 
-    void resetSleepingIgnored(Player player) {
+    private void resetSleepingIgnored(Player player) {
         if (this.sleepIgnored.containsKey(player.getName())) {
             player.setSleepingIgnored(this.sleepIgnored.remove(player.getName()));
         }
     }
 
-    void setSleepingIgnored(Player player) {
+    private void setSleepingIgnored(Player player) {
         if (!this.sleepIgnored.containsKey(player.getName())) {
             this.sleepIgnored.put(player.getName(), player.isSleepingIgnored());
         }

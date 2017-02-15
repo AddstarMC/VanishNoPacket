@@ -6,7 +6,7 @@ import org.kitteh.vanish.VanishPlugin;
 public abstract class Hook {
     protected final VanishPlugin plugin;
 
-    public Hook(VanishPlugin plugin) {
+    protected Hook(VanishPlugin plugin) {
         this.plugin = plugin;
     }
 

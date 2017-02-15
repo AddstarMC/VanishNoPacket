@@ -136,10 +136,10 @@ public final class ListenPlayerOther implements Listener {
     @EventHandler
     public void onPlayerQuitProxy(ProxyLeaveEvent event)
     {
-    	if(plugin.getManager().isVanished(event.getPlayer().getName()) || plugin.getManager().wasVanishedUponQuit(event.getPlayer()))
-    		plugin.messageStatusUpdate(ChatColor.DARK_AQUA + event.getPlayer().getName() + " has quit vanished");
-    	else if (!plugin.getManager().getAnnounceManipulator().getFakeOnlineStatus(event.getPlayer().getName()))
-    		plugin.messageStatusUpdate(ChatColor.DARK_AQUA + event.getPlayer().getName() + " has quit silently");
+    	if(this.plugin.getManager().isVanished(event.getPlayer().getName()) || this.plugin.getManager().wasVanishedUponQuit(event.getPlayer()))
+            this.plugin.messageStatusUpdate(ChatColor.DARK_AQUA + event.getPlayer().getName() + " has quit vanished");
+    	else if (!this.plugin.getManager().getAnnounceManipulator().getFakeOnlineStatus(event.getPlayer().getName()))
+            this.plugin.messageStatusUpdate(ChatColor.DARK_AQUA + event.getPlayer().getName() + " has quit silently");
     }
     
     @EventHandler
