@@ -245,8 +245,7 @@ public final class VanishPlugin extends JavaPlugin {
      * @return whether or not there's a new version available
      */
     public boolean versionDifference() {
-        boolean versionDiff = false;
-        return versionDiff;
+        return false;
     }
 
     @SuppressWarnings("deprecation")

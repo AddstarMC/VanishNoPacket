@@ -5,7 +5,7 @@
 #
 #  See documentation for details:
 #  http://dev.bukkit.org/server-mods/vanish/pages/configuration/
-#
+#  ${project.description}
 fakeannounce:
     automaticforsilentjoin: false
     join: '%p joined the game.'

@@ -1,12 +1,12 @@
 name: VanishNoPacket
 main: org.kitteh.vanish.VanishPlugin
-version: '${plugin.version}'
+version: ${plugin.version}
 website: http://kitteh.org
 softdepend: [Essentials,dynmap]
 depend: [BungeeChatBukkit, Vault, ProtocolLib]
-author: mbaxter
-description: Vanish for the distinguished admin
-dev-url: http://dev.bukkit.org/server-mods/vanish/
+author: mbaxter, narimm
+description: ${project.description}
+dev-url:{$project.url}
 commands:
   vanish:
     description: poof

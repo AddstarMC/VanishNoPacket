@@ -57,7 +57,7 @@ public final class VanishManager {
                 final Player player = entry.getPlayer();
                 final Player target = entry.getTarget();
                 if ((player != null) && player.isOnline() && (target != null) && target.isOnline()) {
-                    player.showPlayer(target);
+                    player.showPlayer(VanishManager.this.plugin,target);
                 }
             }
             this.next.clear();
@@ -139,9 +139,7 @@ public final class VanishManager {
     public boolean wasVanishedUponQuit(OfflinePlayer player)
     {
     	Long time = this.recentlyQuitVanishedPlayers.get(player.getUniqueId());
-    	if(time == null || System.currentTimeMillis() - time >= 1000)
-    		return false;
-    	return true;
+        return time != null && System.currentTimeMillis() - time < 1000;
     }
 
     /**
@@ -333,15 +331,15 @@ public final class VanishManager {
                 if (!VanishPerms.canSeeAll(otherPlayer)) {
                     if (otherPlayer.canSee(vanishingPlayer)) {
                         Debuggle.log("Hiding " + vanishingPlayer.getName() + " from " + otherPlayer.getName());
-                        otherPlayer.hidePlayer(vanishingPlayer);
+                        otherPlayer.hidePlayer(this.plugin, vanishingPlayer);
                     }
                 } else {
-                    otherPlayer.hidePlayer(vanishingPlayer);
+                    otherPlayer.hidePlayer(this.plugin,vanishingPlayer);
                     this.showPlayer.add(new ShowPlayerEntry(otherPlayer, vanishingPlayer));
                 }
             } else {
                 if (VanishPerms.canSeeAll(otherPlayer)) {
-                    otherPlayer.hidePlayer(vanishingPlayer);
+                    otherPlayer.hidePlayer(this.plugin,vanishingPlayer);
                 }
                 if (!otherPlayer.canSee(vanishingPlayer)) {
                     Debuggle.log("Showing " + vanishingPlayer.getName() + " to " + otherPlayer.getName());
@@ -416,7 +414,7 @@ public final class VanishManager {
     private void hideVanished(Player player) {
         for (final Player otherPlayer : this.plugin.getServer().getOnlinePlayers()) {
             if (!player.equals(otherPlayer) && this.isVanished(otherPlayer) && player.canSee(otherPlayer)) {
-                player.hidePlayer(otherPlayer);
+                player.hidePlayer(this.plugin,otherPlayer);
             }
         }
     }
@@ -437,7 +435,7 @@ public final class VanishManager {
         for (final Player player : this.plugin.getServer().getOnlinePlayers()) {
             for (final Player player2 : this.plugin.getServer().getOnlinePlayers()) {
                 if ((player != null) && (player2 != null) && !player.equals(player2)) {
-                    player.showPlayer(player2);
+                    player.showPlayer(this.plugin, player2);
                 }
             }
         }

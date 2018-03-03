@@ -1,5 +1,6 @@
 package org.kitteh.vanish.hooks.plugins;
 
+import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.events.DisguiseEvent;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -9,7 +10,7 @@ import org.bukkit.plugin.Plugin;
 import org.kitteh.vanish.VanishPlugin;
 import org.kitteh.vanish.event.VanishStatusChangeEvent;
 import org.kitteh.vanish.hooks.Hook;
-import me.libraryaddict.disguise.DisguiseAPI;
+
 /**
  * Created for the AddstarMC Project.
  * Created by Narimm on 15/02/2017.
