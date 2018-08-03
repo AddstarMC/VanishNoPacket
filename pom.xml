@@ -6,17 +6,14 @@
   <packaging>jar</packaging>
 
   <name>VanishNoPacket</name>
-  <version>3.20.1</version>
-
-  <url>http://github.com/mbax/VanishNoPacket</url>
-
+  <version>3.21-SNAPSHOT</version>
   <description>A plugin built for Spigot ${spigot.version}. Will not work on lower versions</description>
   <url>https://github.com/AddstarMC/VanishNoPacket</url>
   <properties>
     <build.number />
     <plugin.version>${project.version}-${build.number}</plugin.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <spigot.version>1.13-pre7-R0.1-SNAPSHOT</spigot.version>
+    <spigot.version>1.13-R0.1-SNAPSHOT</spigot.version>
   </properties>
   <scm>
     <connection>scm:git:git@github.com:AddstarMC/VanishNoPacket.git</connection>

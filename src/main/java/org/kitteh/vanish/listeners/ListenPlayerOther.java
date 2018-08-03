@@ -119,7 +119,7 @@ public final class ListenPlayerOther implements Listener {
             event.setCancelled(true);
             return;
         }
-        if ((event.getAction() == Action.PHYSICAL) && (event.getClickedBlock().getType() == Material.SOIL)) {
+        if ((event.getAction() == Action.PHYSICAL) && (event.getClickedBlock().getType() == Material.FARMLAND)) {
             if (this.plugin.getManager().isVanished(player) && VanishPerms.canNotTrample(player)) {
                 event.setCancelled(true);
             }
