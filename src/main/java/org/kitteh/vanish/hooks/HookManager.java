@@ -14,7 +14,6 @@ public final class HookManager {
     public enum HookType {
         LibsDisguise(LibsDisguiseApiHook.class),
         Dynmap(DynmapHook.class),
-        Essentials(EssentialsHook.class),
         ProtocolLib(ProtocolLibHook.class),
         Vault(VaultHook.class),
         BungeeChat(BungeeChatHook.class);

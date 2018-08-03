@@ -196,10 +196,6 @@ public final class VanishPlugin extends JavaPlugin {
         }
 
         Settings.freshStart(this);
-
-        if (this.getConfig().getBoolean("hooks.essentials", false)) {
-            this.hookManager.getHook(HookType.Essentials).onEnable();
-        }
         if (this.getConfig().getBoolean("hooks.dynmap", false)) {
             this.hookManager.getHook(HookType.Dynmap).onEnable();
         }
@@ -248,7 +244,6 @@ public final class VanishPlugin extends JavaPlugin {
         return false;
     }
 
-    @SuppressWarnings("deprecation")
     private void setInstance(VanishPlugin plugin) {
         org.kitteh.vanish.staticaccess.VanishNoPacket.setInstance(plugin);
     }

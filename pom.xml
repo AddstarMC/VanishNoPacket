@@ -13,7 +13,7 @@
     <build.number />
     <plugin.version>${project.version}-${build.number}</plugin.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <spigot.version>1.12.2-R0.1-SNAPSHOT</spigot.version>
+    <spigot.version>1.13-pre7-R0.1-SNAPSHOT</spigot.version>
   </properties>
   <scm>
     <connection>scm:git:git@github.com:AddstarMC/VanishNoPacket.git</connection>
@@ -60,14 +60,14 @@
     <!-- Addstar repos -->
     <repository>
       <id>addstar-repo</id>
-      <url>http://maven.addstar.com.au/artifactory/ext-release-local</url>
+      <url>http://maven.addstar.com.au/artifactory/all-release</url>
       <snapshots>
         <enabled>false</enabled>
       </snapshots>
     </repository>
     <repository>
       <id>addstar-snapshot-repo</id>
-      <url>http://maven.addstar.com.au/artifactory/ext-snapshot-local</url>
+      <url>http://maven.addstar.com.au/artifactory/all-snapshot</url>
       <snapshots>
         <enabled>true</enabled>
       </snapshots>
@@ -142,7 +142,7 @@
     </dependency>
     <dependency>
       <groupId>com.comphenix.protocol</groupId>
-      <artifactId>ProtocolLib</artifactId>
+      <artifactId>ProtocolLib-API</artifactId>
       <version>4.4.0-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
@@ -150,12 +150,6 @@
       <groupId>us.dynmap</groupId>
       <artifactId>DynmapCoreAPI</artifactId>
       <version>2.5</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>com.earth2me</groupId>
-      <artifactId>essentials</artifactId>
-      <version>2.11.1</version>
       <optional>true</optional>
     </dependency>
     <dependency>
@@ -168,6 +162,10 @@
         <exclusion>
           <groupId>org.spigotmc</groupId>
           <artifactId>spigot-api</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.comphenix.protocol</groupId>
+          <artifactId>ProtocolLib</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
