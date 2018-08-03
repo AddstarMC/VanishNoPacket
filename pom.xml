@@ -6,7 +6,10 @@
   <packaging>jar</packaging>
 
   <name>VanishNoPacket</name>
-  <version>3.20.0-SNAPSHOT</version>
+  <version>3.20.1</version>
+
+  <url>http://github.com/mbax/VanishNoPacket</url>
+
   <description>A plugin built for Spigot ${spigot.version}. Will not work on lower versions</description>
   <url>https://github.com/AddstarMC/VanishNoPacket</url>
   <properties>

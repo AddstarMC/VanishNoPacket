@@ -159,7 +159,7 @@ public final class VanishPlugin extends JavaPlugin {
                 player.sendMessage(message);
             }
         }
-        
+
         BungeeChat.mirrorChat(message, Settings.getChatChannel());
     }
 
@@ -223,7 +223,7 @@ public final class VanishPlugin extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new ListenInventory(this), this);
         this.getServer().getPluginManager().registerEvents(new ListenServerPing(this.manager), this);
 
-        this.getLogger().info(this.getCurrentVersion()+" loaded.");
+        this.getLogger().info(this.getCurrentVersion() + " loaded.");
     }
 
     /**
