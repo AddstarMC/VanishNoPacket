@@ -45,8 +45,8 @@ public final class VanishManager {
     }
 
     private final class ShowPlayerHandler implements Runnable {
-        final Set<ShowPlayerEntry> entries = new HashSet<ShowPlayerEntry>();
-        final Set<ShowPlayerEntry> next = new HashSet<ShowPlayerEntry>();
+        final Set<ShowPlayerEntry> entries = new HashSet<>();
+        final Set<ShowPlayerEntry> next = new HashSet<>();
 
         public void add(ShowPlayerEntry player) {
             this.entries.add(player);
@@ -66,8 +66,7 @@ public final class VanishManager {
         }
     }
 
-    public static final String VANISH_PLUGIN_CHANNEL = "vanishnopacket:status";
-
+    private static final String VANISH_PLUGIN_CHANNEL = Settings.getPluginChannel();
     private final VanishPlugin plugin;
     private final Set<String> vanishedPlayerNames = Collections.synchronizedSet(new HashSet<String>());
     private final HashMap<UUID, Long> recentlyQuitVanishedPlayers = new HashMap<UUID, Long>();
@@ -81,16 +80,18 @@ public final class VanishManager {
         this.plugin = plugin;
         this.announceManipulator = new VanishAnnounceManipulator(this.plugin);
         this.plugin.getServer().getScheduler().scheduleSyncRepeatingTask(this.plugin, this.showPlayer, 4, 4);
-
-        this.plugin.getServer().getMessenger().registerIncomingPluginChannel(this.plugin, VanishManager.VANISH_PLUGIN_CHANNEL, new PluginMessageListener() {
-
-            public void onPluginMessageReceived(String channel, Player player, byte[] message) {
-                if (channel.equals(VanishManager.VANISH_PLUGIN_CHANNEL) && new String(message).equals("check")) {
-                    player.sendPluginMessage(plugin, VanishManager.VANISH_PLUGIN_CHANNEL, VanishManager.this.isVanished(player) ? new byte[]{0x01} : new byte[]{0x00});
+        boolean useChannels = Settings.isUsePluginChannels();
+        if(useChannels) {
+            this.plugin.getServer().getMessenger().registerIncomingPluginChannel(this.plugin, VanishManager.VANISH_PLUGIN_CHANNEL, new PluginMessageListener() {
+        
+                public void onPluginMessageReceived(String channel, Player player, byte[] message) {
+                    if (channel.equals(VanishManager.VANISH_PLUGIN_CHANNEL) && new String(message).equals("check")) {
+                        player.sendPluginMessage(plugin, VanishManager.VANISH_PLUGIN_CHANNEL, VanishManager.this.isVanished(player) ? new byte[]{0x01} : new byte[]{0x00});
+                    }
                 }
-            }
-        });
-        this.plugin.getServer().getMessenger().registerOutgoingPluginChannel(this.plugin, VanishManager.VANISH_PLUGIN_CHANNEL);
+            });
+            this.plugin.getServer().getMessenger().registerOutgoingPluginChannel(this.plugin, VanishManager.VANISH_PLUGIN_CHANNEL);
+        }
 
     }
 

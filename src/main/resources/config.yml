@@ -24,7 +24,7 @@ effects:
 colornametags: true
 
 chatchannel: VanishNP
-
+usePluginChannels: true
 permtest: false
 debug: false
 configVersionDoNotTouch: 

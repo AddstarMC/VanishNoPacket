@@ -1,6 +1,7 @@
 name: VanishNoPacket
 main: org.kitteh.vanish.VanishPlugin
 version: ${plugin.version}
+api-version: ${spigot.api.version}
 website: ${project.url}
 softdepend: [Essentials,dynmap]
 depend: [BungeeChatBukkit, Vault, ProtocolLib]

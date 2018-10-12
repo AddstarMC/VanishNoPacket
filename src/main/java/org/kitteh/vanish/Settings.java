@@ -3,6 +3,8 @@ package org.kitteh.vanish;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 
+import java.util.Set;
+
 public final class Settings {
     private static boolean enablePermTest;
     private static String fakeQuit;
@@ -11,9 +13,18 @@ public final class Settings {
     private static boolean worldChangeCheck;
     private static int lightningEffectCount;
     private static String chatChannel;
+    private static boolean usePluginChannels;
+    private static String pluginChannel;
 
     private static final int confVersion = 6; // Tracking config version
-
+    
+    public static boolean isUsePluginChannels() {
+        return usePluginChannels;
+    }
+    
+    public static String getPluginChannel() {
+        return pluginChannel;
+    }
     public static boolean getAutoFakeJoinSilent() {
         return Settings.autoFakeJoinSilent;
     }
@@ -59,18 +70,22 @@ public final class Settings {
                 config.set("permtest", permtest);
                 config.set("enableColoration", null);
                 config.set("enableTabControl", null);
-                final boolean updates = config.getBoolean("updates.check", true);
-                config.set("updates.check", null);
-                config.set("checkupdates", updates);
-            }
-            if ((ver <= 3)) {
                 config.set("effects.lightning.count", 30);
             }
+            final boolean updates = config.getBoolean("updates.check", true);
+            config.set("updates.check", null);
+            config.set("checkupdates", updates);
+        }
+        if ((ver <= 3)) {
             if ((ver <= 4)) {
                 config.set("colornametags", true);
             }
             if ((ver <= 5)) {
             	config.set("chatchannel", "VanishNP");
+            }
+            if((ver <= 6)){
+                config.set("usePluginChannels", true);
+                config.set("pluginChannel","vnp:status");
             }
             config.set("configVersionDoNotTouch.SeriouslyThisWillEraseYourConfig", Settings.confVersion);
             plugin.saveConfig();
@@ -90,5 +105,7 @@ public final class Settings {
         } else {
             Debuggle.nah();
         }
+        Settings.usePluginChannels = plugin.getConfig().getBoolean("usePluginChannels", true);
+        Settings.pluginChannel = config.getString("pluginChannel","vnp:status");
     }
 }
