@@ -204,7 +204,6 @@ public final class VanishPlugin extends JavaPlugin {
         //    this.hookManager.getHook(HookType.ProtocolLib).onEnable();
         //}
 
-        final VanishPlugin self = this;
         //Post-load stuff
 
         this.manager = new VanishManager(this);

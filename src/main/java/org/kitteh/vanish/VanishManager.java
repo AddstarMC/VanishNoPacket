@@ -14,7 +14,6 @@ import org.bukkit.plugin.messaging.PluginMessageListener;
 import org.kitteh.vanish.event.VanishStatusChangeEvent;
 import org.kitteh.vanish.metrics.MetricsOverlord;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -24,7 +23,6 @@ import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 
-@SuppressWarnings("JavaDoc")
 public final class VanishManager {
     private final class ShowPlayerEntry {
         private final Player player;

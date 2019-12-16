@@ -13,8 +13,8 @@
         <build.number/>
         <plugin.version>${project.version}-${build.number}</plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spigot.api.version>1.13</spigot.api.version>
-        <spigot.version>1.13-R0.1-SNAPSHOT</spigot.version>
+        <spigot.api.version>1.15</spigot.api.version>
+        <spigot.version>1.15-R0.1-SNAPSHOT</spigot.version>
     </properties>
     <scm>
         <connection>scm:git:git@github.com:AddstarMC/VanishNoPacket.git</connection>
@@ -156,20 +156,20 @@
         </dependency>
         <dependency>
             <groupId>com.comphenix.protocol</groupId>
-            <artifactId>ProtocolLib-API</artifactId>
-            <version>4.4.0-SNAPSHOT</version>
+            <artifactId>ProtocolLib</artifactId>
+            <version>4.5.0-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>us.dynmap</groupId>
             <artifactId>DynmapCoreAPI</artifactId>
-            <version>2.5</version>
+            <version>3.0-SNAPSHOT</version>
             <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>LibsDisguises</groupId>
             <artifactId>LibsDisguises</artifactId>
-            <version>9.5.0</version>
+            <version>9.8.6</version>
             <optional>true</optional>
             <scope>provided</scope>
             <exclusions>
