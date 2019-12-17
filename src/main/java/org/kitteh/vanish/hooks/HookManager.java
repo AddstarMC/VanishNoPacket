@@ -12,7 +12,7 @@ import org.kitteh.vanish.hooks.plugins.*;
 
 public final class HookManager {
     public enum HookType {
-        LibsDisguise(LibsDisguiseApiHook.class),
+        LibsDisguises(LibsDisguiseApiHook.class),
         Dynmap(DynmapHook.class),
         ProtocolLib(ProtocolLibHook.class),
         Vault(VaultHook.class),

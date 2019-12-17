@@ -14,7 +14,6 @@ import org.bukkit.plugin.messaging.PluginMessageListener;
 import org.kitteh.vanish.event.VanishStatusChangeEvent;
 import org.kitteh.vanish.metrics.MetricsOverlord;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -24,7 +23,6 @@ import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 
-@SuppressWarnings("JavaDoc")
 public final class VanishManager {
     private final class ShowPlayerEntry {
         private final Player player;
@@ -66,7 +64,7 @@ public final class VanishManager {
         }
     }
 
-    private static final String VANISH_PLUGIN_CHANNEL = Settings.getPluginChannel();
+    private static final String VANISH_PLUGIN_CHANNEL = "vanishnopacket:" + (Settings.getPluginChannel().toLowerCase());
     private final VanishPlugin plugin;
     private final Set<String> vanishedPlayerNames = Collections.synchronizedSet(new HashSet<String>());
     private final HashMap<UUID, Long> recentlyQuitVanishedPlayers = new HashMap<UUID, Long>();
@@ -82,6 +80,7 @@ public final class VanishManager {
         this.plugin.getServer().getScheduler().scheduleSyncRepeatingTask(this.plugin, this.showPlayer, 4, 4);
         boolean useChannels = Settings.isUsePluginChannels();
         if(useChannels) {
+        	
             this.plugin.getServer().getMessenger().registerIncomingPluginChannel(this.plugin, VanishManager.VANISH_PLUGIN_CHANNEL, new PluginMessageListener() {
         
                 public void onPluginMessageReceived(String channel, Player player, byte[] message) {

@@ -3,8 +3,6 @@ package org.kitteh.vanish;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 
-import java.util.Set;
-
 public final class Settings {
     private static boolean enablePermTest;
     private static String fakeQuit;
