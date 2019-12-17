@@ -17,6 +17,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.bukkit.event.inventory.InventoryOpenEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerBucketFillEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
@@ -100,9 +102,6 @@ public final class ListenPlayerOther implements Listener {
                 case BREWING_STAND:
                     inventory = ((BrewingStand) blockState).getInventory();
                     break;
-                case BEACON:
-                	player.sendMessage(ChatColor.AQUA + "[VNP] Cannot open Beacons while Invisible.");
-                    break;
                 default:
                 	break;
             }
@@ -157,7 +156,22 @@ public final class ListenPlayerOther implements Listener {
         }
         this.plugin.chestFakeClose(event.getPlayer().getName());
     }
-
+    
+    @EventHandler
+    public void onOpen(InventoryOpenEvent event) {
+    	final Player player = (Player) event.getPlayer();
+        if (!this.plugin.chestFakeInUse(player.getName()) && !player.isSneaking() && this.plugin.getManager().isVanished(player) && VanishPerms.canReadChestsSilently(player)) {
+        	if(event.getInventory().getType().equals(InventoryType.BEACON)) {
+        		Inventory inventory = event.getInventory();
+        		if (inventory != null) {
+                    event.setCancelled(true);
+                    player.openInventory(inventory);
+                    return;
+                }
+        	}
+        }
+    }
+    
     @EventHandler(ignoreCancelled = true)
     public void onShear(PlayerShearEntityEvent event) {
         if (this.plugin.getManager().isVanished(event.getPlayer()) && VanishPerms.canNotInteract(event.getPlayer())) {
