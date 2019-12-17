@@ -80,15 +80,16 @@ public final class VanishManager {
         this.plugin.getServer().getScheduler().scheduleSyncRepeatingTask(this.plugin, this.showPlayer, 4, 4);
         boolean useChannels = Settings.isUsePluginChannels();
         if(useChannels) {
-            this.plugin.getServer().getMessenger().registerIncomingPluginChannel(this.plugin, VanishManager.VANISH_PLUGIN_CHANNEL, new PluginMessageListener() {
+        	
+            this.plugin.getServer().getMessenger().registerIncomingPluginChannel(this.plugin, this.plugin.getName() + ":" + VanishManager.VANISH_PLUGIN_CHANNEL, new PluginMessageListener() {
         
                 public void onPluginMessageReceived(String channel, Player player, byte[] message) {
-                    if (channel.equals(VanishManager.VANISH_PLUGIN_CHANNEL) && new String(message).equals("check")) {
-                        player.sendPluginMessage(plugin, VanishManager.VANISH_PLUGIN_CHANNEL, VanishManager.this.isVanished(player) ? new byte[]{0x01} : new byte[]{0x00});
+                    if (channel.equals(plugin.getName() + ":" + VanishManager.VANISH_PLUGIN_CHANNEL) && new String(message).equals("check")) {
+                        player.sendPluginMessage(plugin, plugin.getName() + ":" + VanishManager.VANISH_PLUGIN_CHANNEL, VanishManager.this.isVanished(player) ? new byte[]{0x01} : new byte[]{0x00});
                     }
                 }
             });
-            this.plugin.getServer().getMessenger().registerOutgoingPluginChannel(this.plugin, VanishManager.VANISH_PLUGIN_CHANNEL);
+            this.plugin.getServer().getMessenger().registerOutgoingPluginChannel(this.plugin, plugin.getName() + ":" + VanishManager.VANISH_PLUGIN_CHANNEL);
         }
 
     }
