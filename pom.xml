@@ -13,7 +13,7 @@
         <build.number/>
         <plugin.version>${project.version}-${build.number}</plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spigot.api.version>1.15</spigot.api.version>
+        <spigot.api.version>1.13</spigot.api.version>
         <spigot.version>1.15-R0.1-SNAPSHOT</spigot.version>
     </properties>
     <scm>
