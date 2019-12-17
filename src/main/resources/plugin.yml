@@ -4,7 +4,8 @@ version: ${plugin.version}
 api-version: ${spigot.api.version}
 website: ${project.url}
 softdepend: [Essentials,dynmap]
-depend: [BungeeChatBukkit, Vault, ProtocolLib]
+depend: [BungeeChatBukkit, Vault]
+softdepend: [ProtocolLib,LibsDisguises]
 author: mbaxter, narimm
 description: ${project.description}
 commands:
