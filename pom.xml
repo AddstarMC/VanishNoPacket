@@ -13,8 +13,8 @@
         <build.number/>
         <plugin.version>${project.version}-${build.number}</plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spigot.api.version>1.13</spigot.api.version>
-        <spigot.version>1.13-R0.1-SNAPSHOT</spigot.version>
+        <spigot.api.version>1.16</spigot.api.version>
+        <spigot.version>1.16.1-R0.1-SNAPSHOT</spigot.version>
     </properties>
     <scm>
         <connection>scm:git:git@github.com:AddstarMC/VanishNoPacket.git</connection>
@@ -37,18 +37,18 @@
         <repository>
             <id>maven.addstar.com.au</id>
             <name>maven.addstar.com.au-releases</name>
-            <url>http://maven.addstar.com.au/artifactory/ext-release-local</url>
+            <url>https://maven.addstar.com.au/artifactory/ext-release-local</url>
         </repository>
         <snapshotRepository>
             <id>maven.addstar.com.au</id>
             <name>maven.addstar.com.au-snapshots</name>
-            <url>http://maven.addstar.com.au/artifactory/ext-snapshot-local</url>
+            <url>https://maven.addstar.com.au/artifactory/ext-snapshot-local</url>
         </snapshotRepository>
     </distributionManagement>
     <repositories>
         <repository>
             <id>md5-repo</id>
-            <url>http://repo.md-5.net/content/groups/public/</url>
+            <url>https://repo.md-5.net/content/groups/public/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
@@ -69,14 +69,14 @@
         <!-- Addstar repos -->
         <repository>
             <id>addstar-repo</id>
-            <url>http://maven.addstar.com.au/artifactory/all-release</url>
+            <url>https://maven.addstar.com.au/artifactory/all-release</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
         </repository>
         <repository>
             <id>addstar-snapshot-repo</id>
-            <url>http://maven.addstar.com.au/artifactory/all-snapshot</url>
+            <url>https://maven.addstar.com.au/artifactory/all-snapshot</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
@@ -88,7 +88,7 @@
         <repository>
             <id>vault-repo</id>
             <name>Public Releases</name>
-            <url>http://nexus.hc.to/content/repositories/pub_releases/</url>
+            <url>https://nexus.hc.to/content/repositories/pub_releases/</url>
         </repository>
         <!-- ProtocolLib -->
         <repository>
@@ -100,12 +100,12 @@
         </repository>
         <repository>
             <id>dmulloy2-repo</id>
-            <url>http://repo.dmulloy2.net/content/groups/public/</url>
+            <url>https://repo.dmulloy2.net/content/groups/public/</url>
         </repository>
         <repository>
             <name>dynmap</name>
             <id>dynmap-repo</id>
-            <url>http://repo.mikeprimm.com/</url>
+            <url>https://repo.mikeprimm.com/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
@@ -116,7 +116,7 @@
         <!-- Maven central -->
         <repository>
             <id>maven-central</id>
-            <url>http://repo1.maven.org/maven2/</url>
+            <url>https://repo1.maven.org/maven2/</url>
         </repository>
         <repository>
             <id>md_5-snapshots</id>
@@ -139,7 +139,7 @@
         <dependency>
             <groupId>au.com.addstar</groupId>
             <artifactId>BungeeChat-Bukkit</artifactId>
-            <version>1.2.0-SNAPSHOT</version>
+            <version>1.3.0-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -156,8 +156,8 @@
         </dependency>
         <dependency>
             <groupId>com.comphenix.protocol</groupId>
-            <artifactId>ProtocolLib-API</artifactId>
-            <version>4.4.0-SNAPSHOT</version>
+            <artifactId>ProtocolLib</artifactId>
+            <version>4.6.0-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -169,7 +169,7 @@
         <dependency>
             <groupId>LibsDisguises</groupId>
             <artifactId>LibsDisguises</artifactId>
-            <version>9.5.0</version>
+            <version>10.0.15-SNAPSHOT</version>
             <optional>true</optional>
             <scope>provided</scope>
             <exclusions>

@@ -2,6 +2,7 @@ package org.kitteh.vanish.listeners;
 
 import java.util.Iterator;
 import java.util.Set;
+import java.util.UUID;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -18,10 +19,10 @@ public final class ListenServerPing implements Listener {
 
     @EventHandler
     public void ping(ServerListPingEvent event) {
-        if (!(event instanceof Iterable)) {
+        if (event == null) {
             return; // Pre-API server
         }
-        final Set<String> invisibles = this.manager.getVanishedPlayers();
+        final Set<UUID> invisiblePlayers = this.manager.getVanishedPlayersUUID();
         final Iterator<Player> players;
         try {
             players = event.iterator();
@@ -32,7 +33,7 @@ public final class ListenServerPing implements Listener {
         Player player;
         while (players.hasNext()) {
             player = players.next();
-            if (invisibles.contains(player.getName())) {
+            if (invisiblePlayers.contains(player.getUniqueId())) {
                 players.remove();
             }
         }

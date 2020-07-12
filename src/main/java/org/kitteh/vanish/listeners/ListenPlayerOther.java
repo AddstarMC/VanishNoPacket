@@ -101,9 +101,6 @@ public final class ListenPlayerOther implements Listener {
                 case BREWING_STAND:
                     inventory = ((BrewingStand) blockState).getInventory();
                     break;
-                case BEACON:
-                    inventory = ((Beacon) blockState).getInventory();
-                    break;
             }
             if (inventory != null) {
                 event.setCancelled(true);

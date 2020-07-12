@@ -77,14 +77,10 @@ public final class ListenPlayerJoin implements Listener {
     	final boolean vanish = this.plugin.getManager().isVanished(event.getPlayer());
     	
     	// Update all states from stored data
-    	Bukkit.getScheduler().runTaskLater(this.plugin, new Runnable()
-		{
-			public void run()
-			{
-				BungeeHelper.setTabGroup(event.getPlayer(), vanish);
-				BungeeHelper.loadStateFromProxy(event.getPlayer());
-				BungeeHelper.setSeeState(event.getPlayer(), VanishPerms.canSeeAll(event.getPlayer()));
-			}
-		}, 10);
+    	Bukkit.getScheduler().runTaskLater(this.plugin, () -> {
+            BungeeHelper.setTabGroup(event.getPlayer(), vanish);
+            BungeeHelper.loadStateFromProxy(event.getPlayer());
+            BungeeHelper.setSeeState(event.getPlayer(), VanishPerms.canSeeAll(event.getPlayer()));
+        }, 10);
     }
 }
