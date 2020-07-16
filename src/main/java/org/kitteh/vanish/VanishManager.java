@@ -302,22 +302,7 @@ public final class VanishManager {
             vanishingPlayer.setCollidable(true);
         }
         if (effects) {
-            final Location oneUp = vanishingPlayer.getLocation().add(0, 1, 0);
-            if (VanishPerms.canEffectSmoke(vanishingPlayer)) {
-                this.effectSmoke(vanishingPlayer.getLocation());
-            }
-            if (VanishPerms.canEffectExplode(vanishingPlayer)) {
-                this.effectExplosion(vanishingPlayer);
-            }
-            if (VanishPerms.canEffectLightning(vanishingPlayer)) {
-                this.effectLightning(vanishingPlayer.getLocation());
-            }
-            if (VanishPerms.canEffectFlames(vanishingPlayer)) {
-                this.effectFlames(oneUp);
-            }
-            if (VanishPerms.canEffectBats(vanishingPlayer)) {
-                this.effectBats(oneUp);
-            }
+            playEffects(vanishingPlayer);
         }
         this.plugin.getServer().getPluginManager().callEvent(new VanishStatusChangeEvent(vanishingPlayer, vanishing));
         vanishingPlayer.sendPluginMessage(this.plugin, VanishManager.VANISH_PLUGIN_CHANNEL, vanishing ? new byte[]{0x01} : new byte[]{0x00});
@@ -349,6 +334,24 @@ public final class VanishManager {
         }
     }
 
+    private void playEffects(Player vanishingPlayer){
+        final Location oneUp = vanishingPlayer.getLocation().add(0, 1, 0);
+        if (VanishPerms.canEffectSmoke(vanishingPlayer)) {
+            this.effectSmoke(vanishingPlayer.getLocation());
+        }
+        if (VanishPerms.canEffectExplode(vanishingPlayer)) {
+            this.effectExplosion(vanishingPlayer);
+        }
+        if (VanishPerms.canEffectLightning(vanishingPlayer)) {
+            this.effectLightning(vanishingPlayer.getLocation());
+        }
+        if (VanishPerms.canEffectFlames(vanishingPlayer)) {
+            this.effectFlames(oneUp);
+        }
+        if (VanishPerms.canEffectBats(vanishingPlayer)) {
+            this.effectBats(oneUp);
+        }
+    }
     /**
      * Vanishes a player. Poof.
      * This is a convenience method.
